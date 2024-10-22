@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
@@ -19,24 +20,23 @@ import org.hibernate.annotations.SQLRestriction;
 @Getter
 @Setter
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE comments SET is_deleted = true WHERE id = ?")
+@SQLDelete(sql = "UPDATE attachments SET is_deleted = true WHERE id = ?")
 @SQLRestriction("is_deleted = false")
-@Table(name = "comments")
-public class Comment {
+@Table(name = "attachments")
+public class Attachment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @Column(name = "task_id", nullable = false)
+    @JoinColumn(name = "task_id", nullable = false)
     private Task task;
-    @ManyToOne
-    @Column(name = "user_id", nullable = false)
-    private User user;
-    @Column(name = "text", nullable = false)
-    private String text;
+    @Column(name = "dropbox_id", nullable = false)
+    private String dropboxId;
+    @Column(name = "file_name", nullable = false)
+    private String fileName;
     @CreationTimestamp
-    @Column(name = "timestamp", nullable = false)
-    private LocalDateTime timestamp;
+    @Column(name = "upload_date", nullable = false)
+    private LocalDateTime uploadDate;
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted = false;
 }
