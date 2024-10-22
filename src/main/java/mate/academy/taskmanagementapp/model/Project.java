@@ -42,13 +42,13 @@ public class Project {
     private LocalDateTime endDate;
     @Enumerated(EnumType.STRING)
     private Status status = Status.INITIATED;
-    @Column(name = "is_deleted", nullable = false)
-    private boolean isDeleted = false;
     @ManyToMany
     @JoinTable(name = "projects_users",
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> users = new HashSet<>();
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted = false;
 
     public enum Status {
         INITIATED,

@@ -1,7 +1,15 @@
 package mate.academy.taskmanagementapp.model;
 
-import jakarta.persistence.*;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,10 +40,11 @@ public class Task {
     private LocalDateTime dueDate;
     @ManyToOne
     @JoinColumn(name = "project_id", nullable = false)
-    private Project projectId;
+    private Project project;
     @ManyToOne
     @JoinColumn(name = "assignee_id", nullable = false)
-    private User assigneeId;
+    private User assignee;
+    //add labels!!!!!!!!!!!!!!!!!!!
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted = false;
 
