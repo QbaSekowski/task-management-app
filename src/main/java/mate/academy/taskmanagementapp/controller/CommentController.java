@@ -29,7 +29,7 @@ public class CommentController {
     @Operation(summary = "Create a new comment", description = "Create a new comment "
             + "providing text for a task")
     public CommentDto createComment(@RequestBody @Valid CreateCommentRequestDto createCommentRequestDto) {
-        //return commentService.create(createCommentRequestDto);
+        //return commentService.createComment(createCommentRequestDto);
     }
 
     @GetMapping

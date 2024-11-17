@@ -30,7 +30,7 @@ public class LabelController {
     @Operation(summary = "Create a new label", description = "Create a new label "
             + "providing name and color")
     public LabelDto createLabel(@RequestBody @Valid CreateLabelRequestDto createLabelRequestDto) {
-        //return labelService.create(createLabelRequestDto);
+        //return labelService.createLabel(createLabelRequestDto);
     }
 
     @GetMapping
