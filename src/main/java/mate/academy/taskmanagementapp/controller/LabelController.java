@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "api/labels")
+@RequestMapping(value = "/api/labels")
 @Tag(name = "Label management", description = "Endpoints for managing labels")
 public class LabelController {
     //private final LabelService labelService;

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "api/projects")
+@RequestMapping(value = "/api/projects")
 @Tag(name = "Project management", description = "Endpoints for managing projects")
 public class ProjectController {
     //private final ProjectService projectService;
