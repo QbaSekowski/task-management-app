@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import mate.academy.taskmanagementapp.dto.label.CreateLabelRequestDto;
 import mate.academy.taskmanagementapp.dto.label.LabelDto;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ public class LabelController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Create a new label", description = "Create a new label "
             + "providing name and color")
     public LabelDto createLabel(@RequestBody @Valid CreateLabelRequestDto createLabelRequestDto) {
@@ -34,12 +36,14 @@ public class LabelController {
     }
 
     @GetMapping
+    @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Get all labels", description = "Get all labels")
     public List<LabelDto> getAllLabels() {
         //return labelService.getAllLabels();
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Update label", description = "Update label with given Id")
     public LabelDto updateLabel(@PathVariable Long id,
                                 @RequestBody CreateLabelRequestDto createLabelRequestDto) {
@@ -48,6 +52,7 @@ public class LabelController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Delete label", description = "Delete label with given Id")
     public void deleteLabel(@PathVariable Long id) {
         //labelService.deleteLabel(id);
