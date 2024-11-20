@@ -9,6 +9,7 @@ import mate.academy.taskmanagementapp.dto.comment.CommentDto;
 import mate.academy.taskmanagementapp.dto.comment.CreateCommentRequestDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,7 @@ public class CommentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Create a new comment", description = "Create a new comment "
             + "providing text for a task")
     public CommentDto createComment(@RequestBody @Valid CreateCommentRequestDto createCommentRequestDto) {
@@ -33,6 +35,7 @@ public class CommentController {
     }
 
     @GetMapping
+    @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Get comments for a task", description = "Get all comments for a task")
     public List<CommentDto> getAllComments(@RequestParam("taskId") Long taskId,
                                            Pageable pageable) {
