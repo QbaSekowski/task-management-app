@@ -2,9 +2,11 @@ package mate.academy.taskmanagementapp.dto.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import mate.academy.taskmanagementapp.validation.FieldMatch;
 import org.hibernate.validator.constraints.Length;
 
-//add fieldmatch for passwords in validation!!!!!!
+@FieldMatch(firstField = "password", secondField = "repeatPassword",
+        message = "The passwords must match")
 public record UserRegistrationRequestDto(
         @NotBlank(message = "username may not be blank")
         String username,
