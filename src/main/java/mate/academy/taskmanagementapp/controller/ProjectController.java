@@ -30,7 +30,7 @@ public class ProjectController {
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Create a new project", description = "Create a new project "
-            + "providing name, description, startDate, endDate and status")
+            + "by providing name, description, startDate, endDate and status")
     public ProjectDto createProject(CreateProjectRequestDto createProjectRequestDto) {
         // return projectService.createProject(createProjectRequestDto);
     }
@@ -44,7 +44,7 @@ public class ProjectController {
 
     @GetMapping("/{id}")
     @PreAuthorize("isAuthenticated()")
-    @Operation(summary = "Get project's details", description = "Get project's details providing its Id")
+    @Operation(summary = "Get project's details", description = "Get project's details by providing its Id")
     public ProjectDto getProjectDetails(@PathVariable Long id) {
         //return projectService.getProjectDetails(id);
     }
@@ -52,7 +52,7 @@ public class ProjectController {
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Update project", description = "Update project "
-            + "providing name, description, startDate, endDate and status")
+            + "by providing name, description, startDate, endDate and status")
     public ProjectDto updateProject(@PathVariable Long id,
                                     @RequestBody CreateProjectRequestDto createProjectRequestDto) {
         //return projectService.updateProject(id, createProjectRequestDto);

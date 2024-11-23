@@ -30,7 +30,7 @@ public class LabelController {
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Create a new label", description = "Create a new label "
-            + "providing name and color")
+            + "by providing name and color")
     public LabelDto createLabel(@RequestBody @Valid CreateLabelRequestDto createLabelRequestDto) {
         //return labelService.createLabel(createLabelRequestDto);
     }
