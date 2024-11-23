@@ -26,7 +26,7 @@ public class AttachmentController {
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Upload a new attachment", description = "Upload a new attachment "
-            + "providing a file for the task")
+            + "by providing a file for the task")
     public AttachmentDto uploadAttachment(@RequestParam("taskId") Long taskId,
                                     @RequestParam("file") MultipartFile file) {
         //return attachmentService.uploadFile(taskId, file);

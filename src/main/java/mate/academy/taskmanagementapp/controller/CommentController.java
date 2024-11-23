@@ -29,7 +29,7 @@ public class CommentController {
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Create a new comment", description = "Create a new comment "
-            + "providing text for a task")
+            + "by providing text for a task")
     public CommentDto createComment(@RequestBody @Valid CreateCommentRequestDto createCommentRequestDto) {
         //return commentService.createComment(createCommentRequestDto);
     }
@@ -37,7 +37,7 @@ public class CommentController {
     @GetMapping
     @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Get comments for a task", description = "Get all comments for a task")
-    public List<CommentDto> getAllComments(@RequestParam("taskId") Long taskId,
+    public List<CommentDto> getAllCommentsForTask(@RequestParam("taskId") Long taskId,
                                            Pageable pageable) {
         //return commentService.getAllComments(taskId, pageable);
     }
