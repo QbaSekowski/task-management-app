@@ -9,3 +9,11 @@ databaseChangeLog:
       file: db/changelog/changes/04-create-users-roles-table.yaml
   - include:
       file: db/changelog/changes/05-insert-users.yaml
+  - include:
+      file: db/changelog/changes/06-create-projects-table.yaml
+  - include:
+      file: db/changelog/changes/07-create-projects-users-table.yaml
+  - include:
+      file: db/changelog/changes/08-create-tasks-table.yaml
+  - include:
+      file: db/changelog/changes/09-create-labels-table.yaml
