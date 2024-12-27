@@ -37,7 +37,7 @@ public class Comment {
     private String text;
     @CreationTimestamp
     @Column(name = "timestamp", nullable = false)
-    private LocalDateTime timestamp;
+    private LocalDateTime timestamp = LocalDateTime.now();
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted = false;
 }
