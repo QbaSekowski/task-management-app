@@ -12,7 +12,7 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    foreignKeyName: fk_task
+                    foreignKeyName: fk_task_id
                     references: tasks(id)
               - column:
                   name: label_id
@@ -20,5 +20,5 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    foreignKeyName: fk_label
+                    foreignKeyName: fk_label_id
                     references: labels(id)

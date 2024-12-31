@@ -17,11 +17,15 @@ databaseChangeLog:
                   name: task_id
                   type: bigint
                   constraints:
+                    foreignKeyName: fk_comments_tasks_id
+                    references: tasks(id)
                     nullable: false
               - column:
                   name: user_id
                   type: bigint
                   constraints:
+                    foreignKeyName: fk_comments_users_id
+                    references: users(id)
                     nullable: false
               - column:
                   name: text
@@ -39,15 +43,3 @@ databaseChangeLog:
                   defaultValueBoolean: false
                   constraints:
                     nullable: false
-        - addForeignKeyConstraint:
-            baseColumnNames: user_id
-            baseTableName: comments
-            constraintName: fk_comments_users
-            referencedTableName: users
-            referencedColumnNames: id
-        - addForeignKeyConstraint:
-            baseColumnNames: task_id
-            baseTableName: comments
-            constraintName: fk_comments_tasks
-            referencedTableName: tasks
-            referencedColumnNames: id

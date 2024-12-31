@@ -12,7 +12,7 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    foreignKeyName: fk_project
+                    foreignKeyName: fk_project_id
                     references: projects(id)
               - column:
                   name: user_id
@@ -20,5 +20,5 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    foreignKeyName: fk_user_projects_users
+                    foreignKeyName: fk_user_projects_users_id
                     references: users(id)

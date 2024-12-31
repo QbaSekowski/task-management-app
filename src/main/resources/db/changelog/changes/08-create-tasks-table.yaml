@@ -42,11 +42,15 @@ databaseChangeLog:
                   name: project_id
                   type: bigint
                   constraints:
+                    foreignKeyName: fk_tasks_projects_id
+                    references: projects(id)
                     nullable: false
               - column:
-                  name: user_id
+                  name: assignee_id
                   type: bigint
                   constraints:
+                    foreignKeyName: fk_tasks_users_tasks_id
+                    references: users(id)
                     nullable: false
               - column:
                   name: is_deleted
@@ -54,15 +58,3 @@ databaseChangeLog:
                   defaultValueBoolean: false
                   constraints:
                     nullable: false
-        - addForeignKeyConstraint:
-            baseColumnNames: project_id
-            baseTableName: tasks
-            constraintName: fk_tasks_projects
-            referencedTableName: projects
-            referencedColumnNames: id
-        - addForeignKeyConstraint:
-            baseColumnNames: user_id
-            baseTableName: tasks
-            constraintName: fk_tasks_users
-            referencedTableName: users
-            referencedColumnNames: id

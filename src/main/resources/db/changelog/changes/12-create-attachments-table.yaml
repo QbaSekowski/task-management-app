@@ -17,6 +17,8 @@ databaseChangeLog:
                   name: task_id
                   type: bigint
                   constraints:
+                    foreignKeyName: fk_attachments_tasks_id
+                    references: tasks(id)
                     nullable: false
               - column:
                   name: dropbox_id
@@ -39,9 +41,3 @@ databaseChangeLog:
                   defaultValueBoolean: false
                   constraints:
                     nullable: false
-        - addForeignKeyConstraint:
-            baseColumnNames: task_id
-            baseTableName: attachments
-            constraintName: fk_attachments_tasks
-            referencedTableName: tasks
-            referencedColumnNames: id
