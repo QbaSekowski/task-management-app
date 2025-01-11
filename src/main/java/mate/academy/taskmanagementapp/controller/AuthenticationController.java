@@ -37,7 +37,7 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     @Operation(summary = "Log in the user", description = "Log registered user into the service "
-            + "using username and password")
+            + "using email and password")
     public UserLoginResponseDto login(
             @RequestBody @Valid UserLoginRequestDto request) {
         //return authenticationService.authenticate(request);

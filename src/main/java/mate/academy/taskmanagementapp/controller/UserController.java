@@ -23,9 +23,9 @@ public class UserController {
     @PutMapping("/{id}/roles")
     @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Update user's role", description = "Update user's role")
-    public UserResponseDto updateUserRole(@PathVariable Long id,
+    public void updateUserRole(@PathVariable Long id,
                                           /*@RequestBody @Valid UpdateUserRoleDto updateUserRoleDto*/) {
-        //return userService.updateUserRole(id, updateUserRoleDto);
+        //userService.updateUserRole(id, updateUserRoleDto);
     }
 
     @GetMapping("/me")
