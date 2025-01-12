@@ -25,7 +25,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Transactional
     @Override
-    public ProjectDto createProject(Long userId, CreateProjectRequestDto createProjectRequestDto) {
+    public ProjectDto createProject(Long userId,
+                                    CreateProjectRequestDto createProjectRequestDto) {
         Project project = projectMapper.toModel(createProjectRequestDto);
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new EntityNotFoundException("User with id " + userId + " not found"));
@@ -44,14 +45,17 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectDto getProjectDetails(Long userId, Long projectId) {
         return projectMapper.toDto(projectRepository.findByUserIdAndProjectId(userId, projectId).orElseThrow(
-                () -> new EntityNotFoundException("Project by id " + projectId + " and user id " + userId + " not found")));
+                () -> new EntityNotFoundException("Project by id "
+                        + projectId + " and user id " + userId + " not found")));
     }
 
     @Transactional
     @Override
-    public ProjectDto updateProject(Long userId, Long projectId, CreateProjectRequestDto createProjectRequestDto) {
+    public ProjectDto updateProject(Long userId, Long projectId,
+                                    CreateProjectRequestDto createProjectRequestDto) {
         Project project = projectRepository.findByUserIdAndProjectId(userId, projectId).orElseThrow(
-                () -> new EntityNotFoundException("Project by id " + projectId + " and user id " + userId + " not found"));
+                () -> new EntityNotFoundException("Project by id "
+                        + projectId + " and user id " + userId + " not found"));
         return projectMapper.toDto(projectRepository.save(project));
     }
 
@@ -59,7 +63,8 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void deleteProject(Long userId, Long projectId) {
         Project project = projectRepository.findByUserIdAndProjectId(userId, projectId).orElseThrow(
-                () -> new EntityNotFoundException("Project by id " + projectId + " and user id " + userId + " not found"));
+                () -> new EntityNotFoundException("Project by id "
+                        + projectId + " and user id " + userId + " not found"));
         projectRepository.deleteById(project.getId());
     }
 }
