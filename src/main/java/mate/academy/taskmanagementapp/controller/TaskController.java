@@ -40,8 +40,8 @@ public class TaskController {
 
     @GetMapping
     @PreAuthorize("isAuthenticated()")
-    @Operation(summary = "Get all tasks", description = "Retrieve all tasks for the project")
-    public List<TaskDto> getAllProjectTasks(@RequestParam("projectId") Long projectId,
+    @Operation(summary = "Get all tasks", description = "Retrieve all tasks")
+    public List<TaskDto> getAllTasks(@RequestParam("projectId") Long projectId,
                                             Pageable pageable) {
         //return taskService.getAllProjectTasks(projectId, pageable);
     }
