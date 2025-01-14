@@ -43,7 +43,7 @@ public class UserController {
     @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Update user's info", description = "Update user's info")
     public UserResponseDto updateUserInfo(Authentication authentication,
-            @RequestBody UserRegistrationRequestDto userRegistrationRequestDto) {
+            @RequestBody @Valid UserRegistrationRequestDto userRegistrationRequestDto) {
         return userService.updateUserInfo(
                 userService.getUserFromAuthentication(authentication).getId(), userRegistrationRequestDto);
     }

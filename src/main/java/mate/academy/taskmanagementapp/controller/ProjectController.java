@@ -3,6 +3,8 @@ package mate.academy.taskmanagementapp.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
+
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import mate.academy.taskmanagementapp.dto.project.CreateProjectRequestDto;
 import mate.academy.taskmanagementapp.dto.project.ProjectDto;
@@ -35,7 +37,7 @@ public class ProjectController {
     @Operation(summary = "Create a new project", description = "Create a new project "
             + "by providing name, description, startDate, endDate and status")
     public ProjectDto createProject(Authentication authentication,
-                                    CreateProjectRequestDto createProjectRequestDto) {
+                                    @RequestBody @Valid CreateProjectRequestDto createProjectRequestDto) {
         return projectService.createProject(userService.getUserFromAuthentication(authentication).getId(),
                 createProjectRequestDto);
     }
@@ -61,7 +63,7 @@ public class ProjectController {
             + "by providing name, description, startDate, endDate and status")
     public ProjectDto updateProject(Authentication authentication,
                                     @PathVariable Long id,
-                                    @RequestBody CreateProjectRequestDto createProjectRequestDto) {
+                                    @RequestBody @Valid CreateProjectRequestDto createProjectRequestDto) {
         return projectService.updateProject(userService.getUserFromAuthentication(authentication).getId(),
                 id, createProjectRequestDto);
     }
