@@ -7,6 +7,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.taskmanagementapp.dto.label.CreateLabelRequestDto;
 import mate.academy.taskmanagementapp.dto.label.LabelDto;
+import mate.academy.taskmanagementapp.service.label.LabelService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/labels")
 @Tag(name = "Label management", description = "Endpoints for managing labels")
 public class LabelController {
-    //private final LabelService labelService;
+    private final LabelService labelService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -32,22 +33,22 @@ public class LabelController {
     @Operation(summary = "Create a new label", description = "Create a new label "
             + "by providing name and color")
     public LabelDto createLabel(@RequestBody @Valid CreateLabelRequestDto createLabelRequestDto) {
-        //return labelService.createLabel(createLabelRequestDto);
+        return labelService.createLabel(createLabelRequestDto);
     }
 
     @GetMapping
     @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Get all labels", description = "Get all labels")
     public List<LabelDto> getAllLabels() {
-        //return labelService.getAllLabels();
+        return labelService.getAllLabels();
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Update label", description = "Update label with given Id")
     public LabelDto updateLabel(@PathVariable Long id,
-                                @RequestBody CreateLabelRequestDto createLabelRequestDto) {
-        //return labelService.updateLabel(id, createLabelRequestDto);
+                                @RequestBody @Valid CreateLabelRequestDto createLabelRequestDto) {
+        return labelService.updateLabel(id, createLabelRequestDto);
     }
 
     @DeleteMapping("/{id}")
@@ -55,6 +56,6 @@ public class LabelController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(summary = "Delete label", description = "Delete label with given Id")
     public void deleteLabel(@PathVariable Long id) {
-        //labelService.deleteLabel(id);
+        labelService.deleteLabel(id);
     }
 }
