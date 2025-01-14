@@ -9,6 +9,8 @@ import mate.academy.taskmanagementapp.dto.user.UserLoginResponseDto;
 import mate.academy.taskmanagementapp.dto.user.UserRegistrationRequestDto;
 import mate.academy.taskmanagementapp.dto.user.UserResponseDto;
 import mate.academy.taskmanagementapp.exception.RegistrationException;
+import mate.academy.taskmanagementapp.security.AuthenticationService;
+import mate.academy.taskmanagementapp.service.user.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,10 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/auth")
 @Tag(name = "Authentication management", description = "Endpoints for managing authentication")
 public class AuthenticationController {
-    /*
     private final AuthenticationService authenticationService;
     private final UserService userService;
-     */
 
     @PostMapping("/registration")
     @ResponseStatus(HttpStatus.CREATED)
@@ -32,7 +32,7 @@ public class AuthenticationController {
             + " password, email, first name, last name")
     public UserResponseDto register(
             @RequestBody @Valid UserRegistrationRequestDto request) throws RegistrationException {
-        //return userService.register(request);
+        return userService.register(request);
     }
 
     @PostMapping("/login")
@@ -40,6 +40,6 @@ public class AuthenticationController {
             + "using email and password")
     public UserLoginResponseDto login(
             @RequestBody @Valid UserLoginRequestDto request) {
-        //return authenticationService.authenticate(request);
+        return authenticationService.authenticate(request);
     }
 }
