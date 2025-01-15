@@ -1,7 +1,6 @@
 package mate.academy.taskmanagementapp.service.dropbox;
 
 import java.io.IOException;
-
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
