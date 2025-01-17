@@ -6,10 +6,11 @@ databaseChangeLog:
         - insert:
             tableName: users
             columns:
-              - column: { name: email, value: "admin@gmail.com"}
-              - column: { name: password, value: "$2a$10$qMpBYmqIiFchfEjzmwuw0u6RuTo3QQTfsJlvpJ32H5EHZEqXRNXP6"}
-              - column: { name: first_name, value: "Admin"}
-              - column: { name: last_name, value: "Administrator"}
+              - column: { name: email, value: "admin@gmail.com" }
+              - column: { name: username, value: "admin" }
+              - column: { name: password, value: "$2a$10$qMpBYmqIiFchfEjzmwuw0u6RuTo3QQTfsJlvpJ32H5EHZEqXRNXP6" }
+              - column: { name: first_name, value: "Admin" }
+              - column: { name: last_name, value: "Administrator" }
         - insert:
             tableName: users_roles
             columns:
@@ -19,6 +20,7 @@ databaseChangeLog:
             tableName: users
             columns:
               - column: { name: email, value: "jurek@wp.pl" }
+              - column: { name: username, value: "jurek" }
               - column: { name: password, value: "$2a$10$6/M/Eo5cO8c0QpVYrNeb4e55nHRvwDege3jQn3NRCgX7FHpFWeDfu" }
               - column: { name: first_name, value: "Jerzy" }
               - column: { name: last_name, value: "Nowak" }
