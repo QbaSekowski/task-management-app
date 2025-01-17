@@ -14,7 +14,8 @@ public interface UserService {
 
     UserResponseDto updateUserInfo(Long id, UserRegistrationRequestDto userRegistrationRequestDto);
 
-    UserResponseDto register(UserRegistrationRequestDto userRegistrationRequestDto) throws RegistrationException;
+    UserResponseDto register(UserRegistrationRequestDto userRegistrationRequestDto)
+            throws RegistrationException;
 
     User getUserFromAuthentication(Authentication authentication);
 }

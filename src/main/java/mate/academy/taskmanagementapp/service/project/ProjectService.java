@@ -11,7 +11,8 @@ public interface ProjectService {
 
     ProjectDto getProjectDetails(Long userId, Long projectId);
 
-    ProjectDto updateProject(Long userId, Long projectId, CreateProjectRequestDto createProjectRequestDto);
+    ProjectDto updateProject(Long userId, Long projectId,
+                             CreateProjectRequestDto createProjectRequestDto);
 
     void deleteProject(Long userId, Long projectId);
 }

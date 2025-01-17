@@ -23,38 +23,45 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/labels")
-@Tag(name = "Label management", description = "Endpoints for managing labels")
+@Tag(name = "Label management",
+        description = "Endpoints for managing labels")
 public class LabelController {
     private final LabelService labelService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAuthority('ADMIN')")
-    @Operation(summary = "Create a new label", description = "Create a new label "
+    @Operation(summary = "Create a new label",
+            description = "Create a new label "
             + "by providing name and color")
-    public LabelDto createLabel(@RequestBody @Valid CreateLabelRequestDto createLabelRequestDto) {
+    public LabelDto createLabel(@RequestBody @Valid CreateLabelRequestDto
+                                            createLabelRequestDto) {
         return labelService.createLabel(createLabelRequestDto);
     }
 
     @GetMapping
     @PreAuthorize("isAuthenticated()")
-    @Operation(summary = "Get all labels", description = "Get all labels")
+    @Operation(summary = "Get all labels",
+            description = "Get all labels")
     public List<LabelDto> getAllLabels() {
         return labelService.getAllLabels();
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    @Operation(summary = "Update label", description = "Update label with given Id")
+    @Operation(summary = "Update label",
+            description = "Update label with given Id")
     public LabelDto updateLabel(@PathVariable Long id,
-                                @RequestBody @Valid CreateLabelRequestDto createLabelRequestDto) {
+                                @RequestBody @Valid CreateLabelRequestDto
+                                        createLabelRequestDto) {
         return labelService.updateLabel(id, createLabelRequestDto);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasAuthority('ADMIN')")
-    @Operation(summary = "Delete label", description = "Delete label with given Id")
+    @Operation(summary = "Delete label",
+            description = "Delete label with given Id")
     public void deleteLabel(@PathVariable Long id) {
         labelService.deleteLabel(id);
     }

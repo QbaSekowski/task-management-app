@@ -23,7 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/comments")
-@Tag(name = "Comment management", description = "Endpoints for managing comments")
+@Tag(name = "Comment management",
+        description = "Endpoints for managing comments")
 public class CommentController {
     private final CommentService commentService;
     private final UserService userService;
@@ -31,20 +32,25 @@ public class CommentController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("isAuthenticated()")
-    @Operation(summary = "Create a new comment", description = "Create a new comment "
+    @Operation(summary = "Create a new comment",
+            description = "Create a new comment "
             + "by providing text for a task")
     public CommentDto createComment(Authentication authentication,
-                                    @RequestBody @Valid CreateCommentRequestDto createCommentRequestDto) {
-        return commentService.createComment(userService.getUserFromAuthentication(authentication).getId(),
+                                    @RequestBody @Valid CreateCommentRequestDto
+                                            createCommentRequestDto) {
+        return commentService.createComment(
+                userService.getUserFromAuthentication(authentication).getId(),
                 createCommentRequestDto);
     }
 
     @GetMapping("/{taskId}")
     @PreAuthorize("isAuthenticated()")
-    @Operation(summary = "Get comments for a task", description = "Get all comments for a task")
+    @Operation(summary = "Get comments for a task",
+            description = "Get all comments for a task")
     public List<CommentDto> getAllCommentsForTask(Authentication authentication,
                                                   @PathVariable Long taskId) {
         return commentService.getAllCommentsForTask(
-                userService.getUserFromAuthentication(authentication).getId(), taskId);
+                userService.getUserFromAuthentication(authentication).getId(),
+                taskId);
     }
 }

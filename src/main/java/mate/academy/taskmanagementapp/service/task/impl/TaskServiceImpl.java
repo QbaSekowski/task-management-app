@@ -28,11 +28,14 @@ public class TaskServiceImpl implements TaskService {
     @Transactional
     @Override
     public TaskDto createTask(Long userId, CreateTaskRequestDto createTaskRequestDto) {
-        Project project = projectRepository.findByUserIdAndProjectId(userId, createTaskRequestDto.projectId()).orElseThrow(
-                () -> new EntityNotFoundException("Project by id "
-                        + createTaskRequestDto.projectId() + " and user id " + userId + " not found"));
+        Project project = projectRepository.findByUserIdAndProjectId(userId,
+                createTaskRequestDto.projectId()).orElseThrow(
+                        () -> new EntityNotFoundException("Project by id "
+                        + createTaskRequestDto.projectId() + " and user id "
+                                + userId + " not found"));
         User user = userRepository.findById(createTaskRequestDto.assigneeId()).orElseThrow(
-                () -> new EntityNotFoundException("User by id " + createTaskRequestDto.assigneeId() + " not found"));
+                () -> new EntityNotFoundException("User by id "
+                        + createTaskRequestDto.assigneeId() + " not found"));
         Task task = taskMapper.toModel(createTaskRequestDto);
         task.setProject(project);
         task.setAssignee(user);
@@ -49,14 +52,16 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskDto getTaskById(Long userId, Long taskId) {
         return taskMapper.toDto(taskRepository.findByAssigneeIdAndId(userId, taskId).orElseThrow(
-                () -> new EntityNotFoundException("Task by id " + taskId + " and user by id " + userId + " not found")));
+                () -> new EntityNotFoundException("Task by id "
+                        + taskId + " and user by id " + userId + " not found")));
     }
 
     @Transactional
     @Override
     public TaskDto updateTask(Long userId, Long taskId, CreateTaskRequestDto createTaskRequestDto) {
         Task task = taskRepository.findByAssigneeIdAndId(userId, taskId).orElseThrow(
-                () -> new EntityNotFoundException("Task by id " + taskId + " and user by id " + userId + " not found"));
+                () -> new EntityNotFoundException("Task by id "
+                        + taskId + " and user by id " + userId + " not found"));
         task.setId(taskId);
         return taskMapper.toDto(taskRepository.save(task));
     }
@@ -65,7 +70,8 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void deleteTask(Long userId, Long taskId) {
         Task task = taskRepository.findByAssigneeIdAndId(userId, taskId).orElseThrow(
-                () -> new EntityNotFoundException("Task by id " + taskId + " and user by id " + userId + " not found"));
+                () -> new EntityNotFoundException("Task by id "
+                        + taskId + " and user by id " + userId + " not found"));
         taskRepository.deleteById(task.getId());
     }
 }

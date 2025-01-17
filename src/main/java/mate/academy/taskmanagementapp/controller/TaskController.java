@@ -33,41 +33,54 @@ public class TaskController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAuthority('ADMIN')")
-    @Operation(summary = "Create a new task", description = "Create a new task "
+    @Operation(summary = "Create a new task",
+            description = "Create a new task "
             + "providing name, description, priority, "
             + "status, dueDate, projectId and assigneeId")
-    public TaskDto createTask(Authentication authentication, @RequestBody @Valid CreateTaskRequestDto createTaskRequestDto) {
-        return taskService.createTask(userService.getUserFromAuthentication(authentication).getId(), createTaskRequestDto);
+    public TaskDto createTask(Authentication authentication,
+                              @RequestBody @Valid CreateTaskRequestDto createTaskRequestDto) {
+        return taskService.createTask(
+                userService.getUserFromAuthentication(authentication).getId(),
+                createTaskRequestDto);
     }
 
     @GetMapping
     @PreAuthorize("isAuthenticated()")
-    @Operation(summary = "Get all tasks", description = "Retrieve all tasks of a specific user")
+    @Operation(summary = "Get all tasks",
+            description = "Retrieve all tasks of a specific user")
     public List<TaskDto> getAllTasks(Authentication authentication) {
-        return taskService.getAllTasks(userService.getUserFromAuthentication(authentication).getId());
+        return taskService.getAllTasks(
+                userService.getUserFromAuthentication(authentication).getId());
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("isAuthenticated()")
-    @Operation(summary = "Retrieve task details", description = "Retrieve task details by providing its Id")
+    @Operation(summary = "Retrieve task details",
+            description = "Retrieve task details by providing its Id")
     public TaskDto getTaskById(Authentication authentication, @PathVariable Long id) {
-        return taskService.getTaskById(userService.getUserFromAuthentication(authentication).getId(), id);
+        return taskService.getTaskById(
+                userService.getUserFromAuthentication(authentication).getId(), id);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    @Operation(summary = "Update task", description = "Update task by providing its ID")
+    @Operation(summary = "Update task",
+            description = "Update task by providing its ID")
     public TaskDto updateTask(Authentication authentication,
                               @PathVariable Long id,
                               @RequestBody @Valid CreateTaskRequestDto createTaskRequestDto) {
-        return taskService.updateTask(userService.getUserFromAuthentication(authentication).getId(), id, createTaskRequestDto);
+        return taskService.updateTask(
+                userService.getUserFromAuthentication(authentication).getId(),
+                id, createTaskRequestDto);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasAuthority('ADMIN')")
-    @Operation(summary = "Delete task", description = "Delete task by providing its ID")
+    @Operation(summary = "Delete task",
+            description = "Delete task by providing its ID")
     public void deleteTask(Authentication authentication, @PathVariable Long id) {
-        taskService.deleteTask(userService.getUserFromAuthentication(authentication).getId(), id);
+        taskService.deleteTask(
+                userService.getUserFromAuthentication(authentication).getId(), id);
     }
 }

@@ -44,8 +44,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectDto getProjectDetails(Long userId, Long projectId) {
-        return projectMapper.toDto(projectRepository.findByUserIdAndProjectId(userId, projectId).orElseThrow(
-                () -> new EntityNotFoundException("Project by id "
+        return projectMapper.toDto(projectRepository.findByUserIdAndProjectId(userId,
+                projectId).orElseThrow(
+                        () -> new EntityNotFoundException("Project by id "
                         + projectId + " and user id " + userId + " not found")));
     }
 

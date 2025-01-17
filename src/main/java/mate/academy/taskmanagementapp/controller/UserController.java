@@ -20,13 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/users")
-@Tag(name = "User management", description = "Endpoints for managing users")
+@Tag(name = "User management",
+        description = "Endpoints for managing users")
 public class UserController {
     private final UserService userService;
 
     @PutMapping("/{id}/roles")
     @PreAuthorize("hasAuthority('ADMIN')")
-    @Operation(summary = "Update user's role", description = "Update user's role")
+    @Operation(summary = "Update user's role",
+            description = "Update user's role")
     public void updateUserRole(@PathVariable Long id,
                                @RequestBody @Valid UserRoleUpdateDto userRoleUpdateDto) {
         userService.updateUserRole(id, userRoleUpdateDto);
@@ -34,17 +36,21 @@ public class UserController {
 
     @GetMapping("/me")
     @PreAuthorize("isAuthenticated()")
-    @Operation(summary = "Retrieve user's info", description = "Retrieve user's info")
+    @Operation(summary = "Retrieve user's info",
+            description = "Retrieve user's info")
     public UserResponseDto getUserInfo(Authentication authentication) {
-        return userService.getUserInfo(userService.getUserFromAuthentication(authentication).getId());
+        return userService.getUserInfo(
+                userService.getUserFromAuthentication(authentication).getId());
     }
 
     @PutMapping("/me")
     @PreAuthorize("isAuthenticated()")
-    @Operation(summary = "Update user's info", description = "Update user's info")
+    @Operation(summary = "Update user's info",
+            description = "Update user's info")
     public UserResponseDto updateUserInfo(Authentication authentication,
             @RequestBody @Valid UserRegistrationRequestDto userRegistrationRequestDto) {
         return userService.updateUserInfo(
-                userService.getUserFromAuthentication(authentication).getId(), userRegistrationRequestDto);
+                userService.getUserFromAuthentication(
+                        authentication).getId(), userRegistrationRequestDto);
     }
 }

@@ -31,19 +31,23 @@ public class AttachmentController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("isAuthenticated()")
-    @Operation(summary = "Upload a new attachment", description = "Upload a new attachment "
+    @Operation(summary = "Upload a new attachment",
+            description = "Upload a new attachment "
             + "by providing a file for the task")
     public AttachmentDto uploadAttachment(Authentication authentication,
                                           @RequestParam("taskId") Long taskId,
-                                          @RequestParam("multipartFile") MultipartFile multipartFile)
+                                          @RequestParam("multipartFile") MultipartFile
+                                                      multipartFile)
             throws IOException, InterruptedException {
         return attachmentService.uploadAttachment(
-                userService.getUserFromAuthentication(authentication).getId(), taskId, multipartFile);
+                userService.getUserFromAuthentication(authentication).getId(),
+                taskId, multipartFile);
     }
 
     @GetMapping("/{taskId}")
     @PreAuthorize("isAuthenticated()")
-    @Operation(summary = "Get attachments for a task", description = "Get all attachments for a task")
+    @Operation(summary = "Get attachments for a task",
+            description = "Get all attachments for a task")
     public List<AttachmentDto> getAllAttachments(Authentication authentication,
                                                  @PathVariable Long taskId) {
         return attachmentService.getAllAttachments(

@@ -33,7 +33,8 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("User with id " + id + " not found"));
         Role role = roleRepository.findRoleByName(userRoleUpdateDto.name()).orElseThrow(
-                () -> new EntityNotFoundException("Role with name " + userRoleUpdateDto.name() + " not found"));
+                () -> new EntityNotFoundException("Role with name "
+                        + userRoleUpdateDto.name() + " not found"));
         user.getRoles().add(role);
         userMapper.toDto(userRepository.save(user));
     }
@@ -47,7 +48,8 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public UserResponseDto updateUserInfo(Long id, UserRegistrationRequestDto userRegistrationRequestDto) {
+    public UserResponseDto updateUserInfo(Long id,
+                                          UserRegistrationRequestDto userRegistrationRequestDto) {
         User user = userMapper.toModel(userRegistrationRequestDto);
         user.setId(id);
         return userMapper.toDto(userRepository.save(user));

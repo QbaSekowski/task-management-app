@@ -31,8 +31,10 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = commentMapper.toModel(createCommentRequestDto);
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new EntityNotFoundException("User with id " + userId + " not found"));
-        Task task = taskRepository.findByAssigneeIdAndId(userId, createCommentRequestDto.taskId()).orElseThrow(
-                () -> new EntityNotFoundException("User with id " + userId + " not found or task with id "
+        Task task = taskRepository.findByAssigneeIdAndId(userId,
+                createCommentRequestDto.taskId()).orElseThrow(
+                        () -> new EntityNotFoundException("User with id " + userId
+                        + " not found or task with id "
                         + createCommentRequestDto.taskId() + " not found"));
         comment.setUser(user);
         comment.setTask(task);

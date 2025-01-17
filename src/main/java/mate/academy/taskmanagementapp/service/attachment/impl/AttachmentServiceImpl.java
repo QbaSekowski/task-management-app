@@ -27,7 +27,8 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     @Transactional
     @Override
-    public AttachmentDto uploadAttachment(Long userId, Long taskId, MultipartFile multipartFile) throws IOException, InterruptedException {
+    public AttachmentDto uploadAttachment(Long userId, Long taskId, MultipartFile multipartFile)
+            throws IOException, InterruptedException {
         Task task = taskRepository.findByAssigneeIdAndId(userId, taskId).orElseThrow(
                 () -> new EntityNotFoundException("Task by id " + taskId
                         + " and user id " + userId + " not found"));

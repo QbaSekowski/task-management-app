@@ -21,22 +21,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/auth")
-@Tag(name = "Authentication management", description = "Endpoints for managing authentication")
+@Tag(name = "Authentication management",
+        description = "Endpoints for managing authentication")
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final UserService userService;
 
     @PostMapping("/registration")
     @ResponseStatus(HttpStatus.CREATED)
-    @Operation(summary = "Create a new user", description = "Create a new user with given username, "
+    @Operation(summary = "Create a new user",
+            description = "Create a new user with given username, "
             + " password, email, first name, last name")
     public UserResponseDto register(
-            @RequestBody @Valid UserRegistrationRequestDto request) throws RegistrationException {
+            @RequestBody @Valid UserRegistrationRequestDto request)
+            throws RegistrationException {
         return userService.register(request);
     }
 
     @PostMapping("/login")
-    @Operation(summary = "Log in the user", description = "Log registered user into the service "
+    @Operation(summary = "Log in the user",
+            description = "Log registered user into the service "
             + "using email and password")
     public UserLoginResponseDto login(
             @RequestBody @Valid UserLoginRequestDto request) {
