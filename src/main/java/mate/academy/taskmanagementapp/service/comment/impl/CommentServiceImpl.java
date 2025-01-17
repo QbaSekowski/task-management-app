@@ -40,8 +40,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDto> getAllCommentsForTask(Long taskId) {
-        return commentRepository.findAllByTaskId(taskId).stream()
+    public List<CommentDto> getAllCommentsForTask(Long userId, Long taskId) {
+        return commentRepository.findAllByUserIdAndTaskId(userId, taskId).stream()
                 .map(commentMapper::toDto)
                 .collect(Collectors.toList());
     }

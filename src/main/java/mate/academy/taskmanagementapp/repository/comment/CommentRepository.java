@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
-    List<Comment> findAllByTaskId(Long taskId);
+    List<Comment> findAllByUserIdAndTaskId(Long userId, Long taskId);
 }

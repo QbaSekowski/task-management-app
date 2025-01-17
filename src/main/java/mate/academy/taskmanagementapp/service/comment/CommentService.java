@@ -7,5 +7,5 @@ import mate.academy.taskmanagementapp.dto.comment.CreateCommentRequestDto;
 public interface CommentService {
     CommentDto createComment(Long userId, CreateCommentRequestDto createCommentRequestDto);
 
-    List<CommentDto> getAllCommentsForTask(Long taskId);
+    List<CommentDto> getAllCommentsForTask(Long userId, Long taskId);
 }
