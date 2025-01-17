@@ -13,15 +13,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.SQLRestriction;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE attachments SET is_deleted = true WHERE id = ?")
-@SQLRestriction("is_deleted = false")
 @Table(name = "attachments")
 public class Attachment {
     @Id
@@ -36,7 +32,5 @@ public class Attachment {
     private String fileName;
     @CreationTimestamp
     @Column(name = "upload_date", nullable = false)
-    private LocalDateTime uploadDate;
-    @Column(name = "is_deleted", nullable = false)
-    private boolean isDeleted = false;
+    private LocalDateTime uploadDate = LocalDateTime.now();
 }
