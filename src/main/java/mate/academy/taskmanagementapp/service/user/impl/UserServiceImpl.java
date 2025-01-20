@@ -1,5 +1,6 @@
 package mate.academy.taskmanagementapp.service.user.impl;
 
+import java.util.HashSet;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import mate.academy.taskmanagementapp.dto.user.UserRegistrationRequestDto;
@@ -35,7 +36,8 @@ public class UserServiceImpl implements UserService {
         Role role = roleRepository.findRoleByName(userRoleUpdateDto.name()).orElseThrow(
                 () -> new EntityNotFoundException("Role with name "
                         + userRoleUpdateDto.name() + " not found"));
-        user.getRoles().add(role);
+        Set<Role> setOfRoles = new HashSet<>(user.getRoles());
+        setOfRoles.add(role);
         userMapper.toDto(userRepository.save(user));
     }
 
