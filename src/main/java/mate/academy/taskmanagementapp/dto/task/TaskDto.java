@@ -1,6 +1,6 @@
 package mate.academy.taskmanagementapp.dto.task;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
 import mate.academy.taskmanagementapp.dto.label.LabelDto;
 
@@ -10,7 +10,7 @@ public record TaskDto(
         String description,
         String priority,
         String status,
-        LocalDateTime dueDate,
+        LocalDate dueDate,
         Long projectId,
         Long assigneeId,
         Set<LabelDto> labels) {

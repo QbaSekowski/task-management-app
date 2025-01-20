@@ -2,7 +2,7 @@ package mate.academy.taskmanagementapp.dto.project;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import mate.academy.taskmanagementapp.model.Project;
 
 public record CreateProjectRequestDto(
@@ -10,9 +10,9 @@ public record CreateProjectRequestDto(
         String name,
         String description,
         @NotNull
-        LocalDateTime startDate,
+        LocalDate startDate,
         @NotNull
-        LocalDateTime endDate,
+        LocalDate endDate,
         @NotNull
         Project.Status status) {
 }
