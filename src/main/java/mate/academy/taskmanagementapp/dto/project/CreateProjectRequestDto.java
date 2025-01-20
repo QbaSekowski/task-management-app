@@ -13,5 +13,6 @@ public record CreateProjectRequestDto(
         LocalDateTime startDate,
         @NotNull
         LocalDateTime endDate,
+        @NotNull
         Project.Status status) {
 }
