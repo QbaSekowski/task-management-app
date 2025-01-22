@@ -27,7 +27,8 @@ public class UserRepositoryTest {
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void findUserById_Ok() {
         User expectedUser = createUser();
-        User actualUser = (User) userRepository.findById(1L).get();
+        Long correctId = 1L;
+        User actualUser = (User) userRepository.findById(correctId).get();
         assertNotNull(actualUser);
         assertEquals(expectedUser.getId(), actualUser.getId());
         assertEquals(expectedUser.getUsername(), actualUser.getUsername());
@@ -45,7 +46,8 @@ public class UserRepositoryTest {
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void findUserByUsername_Ok() {
         User expectedUser = createUser();
-        User actualUser = (User) userRepository.findByUsername("admin").get();
+        String correctUsername = "admin";
+        User actualUser = (User) userRepository.findByUsername(correctUsername).get();
         assertNotNull(actualUser);
         assertEquals(expectedUser.getId(), actualUser.getId());
         assertEquals(expectedUser.getUsername(), actualUser.getUsername());
@@ -63,7 +65,8 @@ public class UserRepositoryTest {
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void findUserByCorrectEmail_Ok() {
         User expectedUser = createUser();
-        User actualUser = (User) userRepository.findUserByEmail("admin@gmail.com").get();
+        String correctEmail = "admin@gmail.com";
+        User actualUser = (User) userRepository.findUserByEmail(correctEmail).get();
         assertNotNull(actualUser);
         assertEquals(expectedUser.getId(), actualUser.getId());
         assertEquals(expectedUser.getUsername(), actualUser.getUsername());
@@ -80,11 +83,11 @@ public class UserRepositoryTest {
     @Sql(scripts = "classpath:/database/user/remove-test-user.sql",
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void findUserByIncorrectId_throwEntityNotFoundException() {
-        Long id = 8L;
-        String expectedMessage = "User with id " + id + " not found";
+        Long incorrectId = 8L;
+        String expectedMessage = "User with id " + incorrectId + " not found";
         EntityNotFoundException actualException = Assertions.assertThrows(
                 EntityNotFoundException.class,
-                () -> userRepository.findById(id).orElseThrow(() ->
+                () -> userRepository.findById(incorrectId).orElseThrow(() ->
                         new EntityNotFoundException(expectedMessage)));
         assertEquals(expectedMessage, actualException.getMessage());
     }
