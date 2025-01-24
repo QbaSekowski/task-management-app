@@ -55,6 +55,19 @@ public class CommentRepositoryTest {
     @Sql(scripts = "classpath:/database/project/remove-all-projects.sql",
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void findAllByUserIdAndTaskId_Ok() {
+        List<Comment> expectedComments = createTwoComments();
+        List<Comment> actualComments = commentRepository.findAllByUserIdAndTaskId(2L, 1L);
+        assertNotNull(actualComments);
+        assertEquals(expectedComments.size(), actualComments.size());
+        assertEquals(expectedComments.get(0).getId(), actualComments.get(0).getId());
+        assertEquals(expectedComments.get(1).getId(), actualComments.get(1).getId());
+        assertEquals(expectedComments.get(0).getText(), actualComments.get(0).getText());
+        assertEquals(expectedComments.get(1).getText(), actualComments.get(1).getText());
+        assertEquals(expectedComments.get(0).getTimestamp(), actualComments.get(0).getTimestamp());
+        assertEquals(expectedComments.get(1).getTimestamp(), actualComments.get(1).getTimestamp());
+    }
+
+    private List<Comment> createTwoComments() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         Comment comment1 = new Comment();
         comment1.setId(1L);
@@ -64,15 +77,6 @@ public class CommentRepositoryTest {
         comment2.setId(2L);
         comment2.setText("Comment 2 text");
         comment2.setTimestamp(LocalDateTime.parse("2025-01-02 17:21:17", formatter));
-        List<Comment> actualComments = commentRepository.findAllByUserIdAndTaskId(2L, 1L);
-        List<Comment> expectedComments = List.of(comment1, comment2);
-        assertNotNull(actualComments);
-        assertEquals(expectedComments.size(), actualComments.size());
-        assertEquals(expectedComments.get(0).getId(), actualComments.get(0).getId());
-        assertEquals(expectedComments.get(1).getId(), actualComments.get(1).getId());
-        assertEquals(expectedComments.get(0).getText(), actualComments.get(0).getText());
-        assertEquals(expectedComments.get(1).getText(), actualComments.get(1).getText());
-        assertEquals(expectedComments.get(0).getTimestamp(), actualComments.get(0).getTimestamp());
-        assertEquals(expectedComments.get(1).getTimestamp(), actualComments.get(1).getTimestamp());
+        return List.of(comment1, comment2);
     }
 }
