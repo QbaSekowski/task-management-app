@@ -30,7 +30,7 @@ public class TaskRepositoryTest {
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Sql(scripts = "classpath:/database/project/remove-all-projects.sql",
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void findAllByAssigneeId_Ok() {
+    public void findAllByAssigneeId_CorrectId_ReturnsAllCorrectTasks() {
         List<Task> expectedTasks = createTwoTasks();
         List<Task> actualTasks = taskRepository.findAllByAssigneeId(2L);
         assertNotNull(actualTasks);
@@ -57,7 +57,7 @@ public class TaskRepositoryTest {
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Sql(scripts = "classpath:/database/project/remove-all-projects.sql",
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void findAllByAssigneeIdAndTaskId_Ok() {
+    public void findAllByAssigneeIdAndTaskId_CorrectIds_ReturnsCorrectTask() {
         Optional<Task> expectedTasks = createOneTasks();
         Optional<Task> actualTasks = taskRepository.findByAssigneeIdAndId(2L, 2L);
         assertNotNull(actualTasks);
@@ -78,7 +78,7 @@ public class TaskRepositoryTest {
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Sql(scripts = "classpath:/database/project/remove-all-projects.sql",
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void findAllByAssigneeIdAndTaskId_returnEmptyOptional() {
+    public void findAllByAssigneeIdAndTaskId_IncorrectIds_ReturnsEmptyOptional() {
         Optional<Task> actualTasks = taskRepository.findByAssigneeIdAndId(1L, 3L);
         assertEquals(Optional.empty(), actualTasks);
     }

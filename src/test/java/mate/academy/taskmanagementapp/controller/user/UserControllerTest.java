@@ -51,7 +51,7 @@ public class UserControllerTest {
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = "classpath:database/user/remove-all-users.sql",
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void getUserInfo_Ok() throws Exception {
+    public void getUserInfo_ThreeUsersInDb_ReturnsAllUsersDtos() throws Exception {
         User user = new User();
         user.setId(3L);
         user.setUsername("user3");
@@ -76,7 +76,7 @@ public class UserControllerTest {
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = "classpath:database/user/remove-all-users.sql",
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void updateUserInfo_Ok() throws Exception {
+    public void updateUserInfo_CorrectIdAndRequestDto_ReturnsUpdatedUserDto() throws Exception {
         UserRegistrationRequestDto userRegistrationRequestDto = new UserRegistrationRequestDto(
                 "user3", "user3password", "user3password",
                 "user3@gmail.com", "user3firstname", "Updated last name");
@@ -102,13 +102,15 @@ public class UserControllerTest {
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = "classpath:database/user/remove-all-users.sql",
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void updateUserRole_Ok() throws Exception {
+    public void updateUserRole_CorrectId_ReturnsOkStatus() throws Exception {
         UserRoleUpdateDto userRoleUpdateDto = new UserRoleUpdateDto(Role.RoleName.ADMIN);
         String jsonRequest = objectMapper.writeValueAsString(userRoleUpdateDto);
-        mockMvc.perform(put("/users/1/roles")
+        MvcResult result = mockMvc.perform(put("/users/1/roles")
                         .content(jsonRequest)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
+        int actual = result.getResponse().getStatus();
+        assertEquals(200, actual);
     }
 }

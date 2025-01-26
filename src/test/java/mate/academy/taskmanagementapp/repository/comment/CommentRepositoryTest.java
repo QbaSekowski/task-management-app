@@ -35,7 +35,7 @@ public class CommentRepositoryTest {
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Sql(scripts = "classpath:/database/project/remove-all-projects.sql",
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void findAllByUserIdAndTaskId_returnEmptyList() {
+    public void findAllCommentsByUserIdAndTaskId_IncorrectId_ReturnsEmptyList() {
         List<Comment> actualComments = commentRepository.findAllByUserIdAndTaskId(1L, 4L);
         assertEquals(0, actualComments.size());
     }
@@ -54,7 +54,7 @@ public class CommentRepositoryTest {
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Sql(scripts = "classpath:/database/project/remove-all-projects.sql",
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void findAllByUserIdAndTaskId_Ok() {
+    public void findAllCommentsByUserIdAndTaskId_CorrectID_ReturnsAllCorrectComments() {
         List<Comment> expectedComments = createTwoComments();
         List<Comment> actualComments = commentRepository.findAllByUserIdAndTaskId(2L, 1L);
         assertNotNull(actualComments);

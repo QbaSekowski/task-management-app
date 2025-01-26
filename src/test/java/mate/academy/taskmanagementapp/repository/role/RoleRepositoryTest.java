@@ -23,7 +23,7 @@ public class RoleRepositoryTest {
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = "classpath:/database/role/remove-test-role.sql",
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void findRoleByName_Ok() {
+    public void findRoleByName_CorrectName_ReturnsCorrectRole() {
         Role expectedRole = new Role();
         expectedRole.setId(1L);
         expectedRole.setName(Role.RoleName.USER);

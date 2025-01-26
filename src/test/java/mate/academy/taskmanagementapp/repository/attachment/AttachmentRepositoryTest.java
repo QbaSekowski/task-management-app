@@ -34,7 +34,7 @@ public class AttachmentRepositoryTest {
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Sql(scripts = "classpath:/database/project/remove-all-projects.sql",
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void findAllAttachmentsByTaskId_OK() {
+    public void findAllAttachmentsByTaskId_CorrectId_ReturnsAllAttachments() {
         List<Attachment> expectedAttachments = createTwoAttachments();
         List<Attachment> actualAttachments = attachmentRepository.findAllByTaskId(2L);
         assertNotNull(actualAttachments);

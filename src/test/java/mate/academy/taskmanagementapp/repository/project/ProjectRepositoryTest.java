@@ -26,7 +26,7 @@ public class ProjectRepositoryTest {
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = "classpath:/database/project/remove-all-projects.sql",
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void findAllProjectsByUserId_Ok() {
+    public void findAllProjectsByUserId_CorrectId_ReturnsAllCorrectProjects() {
         List<Project> expectedProjects = createThreeProjects();
         List<Project> actualProjects = projectRepository.findAllByUserId(1L);
         assertNotNull(actualProjects);
@@ -57,7 +57,7 @@ public class ProjectRepositoryTest {
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = "classpath:/database/project/remove-all-projects.sql",
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void findAllProjectsByIDAndUserId_Ok() {
+    public void findAllProjectsByIDAndUserId_CorrectIds_ReturnsCorrectProject() {
         Optional<Project> expectedProjects = createProject();
         Optional<Project> actualProjects = projectRepository.findByUserIdAndProjectId(2L, 2L);
         assertNotNull(actualProjects);
