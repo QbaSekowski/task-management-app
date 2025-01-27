@@ -38,7 +38,6 @@ public class LabelServiceImpl implements LabelService {
     public LabelDto updateLabel(Long labelId, CreateLabelRequestDto createLabelRequestDto) {
         Label label = labelRepository.findById(labelId).orElseThrow(
                 () -> new EntityNotFoundException("Label with id " + labelId + " not found"));
-        //label.setId(labelId);
         Label updatedLabel = labelMapper.updateLabel(createLabelRequestDto, label);
         return labelMapper.toDto(labelRepository.save(updatedLabel));
     }
