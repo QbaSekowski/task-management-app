@@ -70,6 +70,32 @@ public class UserServiceTest {
         assertEquals(expectedUserResponseDto, actualUserResponseDto);
     }
 
+    @Test
+    @DisplayName("Update user info")
+    public void updateUserInfo_CorrectUserRequest_ReturnsUserDto() {
+        UserRegistrationRequestDto userRegistrationRequestDto
+                = new UserRegistrationRequestDto("New username",
+                "New password", "New password", "newemail@email.com",
+                "New first name", "New last name");
+        User user = createUser();
+        User updatedUser = new User();
+        updatedUser.setId(user.getId());
+        updatedUser.setUsername(userRegistrationRequestDto.username());
+        updatedUser.setPassword(userRegistrationRequestDto.password());
+        updatedUser.setEmail(userRegistrationRequestDto.email());
+        updatedUser.setFirstName(userRegistrationRequestDto.firstName());
+        updatedUser.setLastName(userRegistrationRequestDto.lastName());
+        UserResponseDto expected = new UserResponseDto(user.getId(), user.getUsername(),
+                user.getEmail(), user.getFirstName(), user.getLastName());
+        when(userMapper.toDto(updatedUser)).thenReturn(expected);
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+        when(userMapper.updateUser(userRegistrationRequestDto, user)).thenReturn(updatedUser);
+        when(userRepository.save(updatedUser)).thenReturn(updatedUser);
+        UserResponseDto actual = userService.updateUserInfo(user.getId(), userRegistrationRequestDto);
+        assertNotNull(actual);
+        assertEquals(expected, actual);
+    }
+
     private User createUser() {
         User user = new User();
         user.setId(1L);
