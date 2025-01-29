@@ -84,6 +84,7 @@ public class LabelServiceTest {
     @DisplayName("Delete label")
     public void deleteLabel_CorrectId_LabelDeleted() {
         Label label = createLabel();
+        labelRepository.save(label);
         Long labelId = label.getId();
         labelService.deleteLabel(label.getId());
         assertFalse(labelRepository.findById(labelId).isPresent());
