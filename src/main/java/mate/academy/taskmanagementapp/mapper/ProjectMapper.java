@@ -13,5 +13,6 @@ public interface ProjectMapper {
 
     ProjectDto toDto(Project project);
 
-    Project updateProject(CreateProjectRequestDto createProjectRequestDto, @MappingTarget Project project);
+    Project updateProject(CreateProjectRequestDto createProjectRequestDto,
+                          @MappingTarget Project project);
 }

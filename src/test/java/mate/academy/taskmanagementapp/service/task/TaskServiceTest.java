@@ -77,7 +77,8 @@ public class TaskServiceTest {
                 task.getDescription(), task.getPriority().name(), task.getStatus().name(),
                 task.getDueDate(), project.getId(), user.getId(), new HashSet<>());
         when(taskMapper.toDto(task)).thenReturn(expected);
-        when(taskRepository.findByAssigneeIdAndId(user.getId(), task.getId())).thenReturn(Optional.of(task));
+        when(taskRepository.findByAssigneeIdAndId(user.getId(), task.getId()))
+                .thenReturn(Optional.of(task));
         TaskDto actual = taskService.getTaskById(user.getId(), task.getId());
         assertNotNull(actual);
         assertEquals(expected, actual);
@@ -87,7 +88,8 @@ public class TaskServiceTest {
     @DisplayName("Retrieve task details with incorrect id - throw EntityNotFoundException")
     public void getTaskDetails_IncorrectTaskRequest_ThrowsEntityNotFoundException() {
         Long incorrectId = 15L;
-        when(taskRepository.findByAssigneeIdAndId(incorrectId, incorrectId)).thenReturn(Optional.empty());
+        when(taskRepository.findByAssigneeIdAndId(incorrectId, incorrectId))
+                .thenReturn(Optional.empty());
         String expectedInfo = "Task by id "
                 + incorrectId + " and user by id " + incorrectId + " not found";
         EntityNotFoundException exception =

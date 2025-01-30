@@ -91,7 +91,8 @@ public class UserServiceTest {
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
         when(userMapper.updateUser(userRegistrationRequestDto, user)).thenReturn(updatedUser);
         when(userRepository.save(updatedUser)).thenReturn(updatedUser);
-        UserResponseDto actual = userService.updateUserInfo(user.getId(), userRegistrationRequestDto);
+        UserResponseDto actual = userService.updateUserInfo(user.getId(),
+                userRegistrationRequestDto);
         assertNotNull(actual);
         assertEquals(expected, actual);
     }

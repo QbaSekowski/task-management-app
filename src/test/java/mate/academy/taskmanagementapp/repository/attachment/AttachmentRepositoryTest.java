@@ -40,13 +40,20 @@ public class AttachmentRepositoryTest {
         assertNotNull(actualAttachments);
         assertEquals(expectedAttachments.size(), actualAttachments.size());
         assertEquals(expectedAttachments.get(0).getId(), actualAttachments.get(0).getId());
-        assertEquals(expectedAttachments.get(0).getDropboxId(), actualAttachments.get(0).getDropboxId());
-        assertEquals(expectedAttachments.get(0).getFileName(), actualAttachments.get(0).getFileName());
-        assertEquals(expectedAttachments.get(0).getUploadDate(), actualAttachments.get(0).getUploadDate());
-        assertEquals(expectedAttachments.get(1).getId(), actualAttachments.get(1).getId());
-        assertEquals(expectedAttachments.get(1).getDropboxId(), actualAttachments.get(1).getDropboxId());
-        assertEquals(expectedAttachments.get(1).getFileName(), actualAttachments.get(1).getFileName());
-        assertEquals(expectedAttachments.get(1).getUploadDate(), actualAttachments.get(1).getUploadDate());
+        assertEquals(expectedAttachments.get(0).getDropboxId(),
+                actualAttachments.get(0).getDropboxId());
+        assertEquals(expectedAttachments.get(0).getFileName(),
+                actualAttachments.get(0).getFileName());
+        assertEquals(expectedAttachments.get(0).getUploadDate(),
+                actualAttachments.get(0).getUploadDate());
+        assertEquals(expectedAttachments.get(1).getId(),
+                actualAttachments.get(1).getId());
+        assertEquals(expectedAttachments.get(1).getDropboxId(),
+                actualAttachments.get(1).getDropboxId());
+        assertEquals(expectedAttachments.get(1).getFileName(),
+                actualAttachments.get(1).getFileName());
+        assertEquals(expectedAttachments.get(1).getUploadDate(),
+                actualAttachments.get(1).getUploadDate());
     }
 
     private List<Attachment> createTwoAttachments() {

@@ -33,19 +33,22 @@ public class ProjectRepositoryTest {
         assertEquals(expectedProjects.size(), actualProjects.size());
         assertEquals(expectedProjects.get(0).getId(), actualProjects.get(0).getId());
         assertEquals(expectedProjects.get(0).getName(), actualProjects.get(0).getName());
-        assertEquals(expectedProjects.get(0).getDescription(), actualProjects.get(0).getDescription());
+        assertEquals(expectedProjects.get(0).getDescription(),
+                actualProjects.get(0).getDescription());
         assertEquals(expectedProjects.get(0).getStartDate(), actualProjects.get(0).getStartDate());
         assertEquals(expectedProjects.get(0).getEndDate(), actualProjects.get(0).getEndDate());
         assertEquals(expectedProjects.get(0).getStatus(), actualProjects.get(0).getStatus());
         assertEquals(expectedProjects.get(1).getId(), actualProjects.get(1).getId());
         assertEquals(expectedProjects.get(1).getName(), actualProjects.get(1).getName());
-        assertEquals(expectedProjects.get(1).getDescription(), actualProjects.get(1).getDescription());
+        assertEquals(expectedProjects.get(1).getDescription(),
+                actualProjects.get(1).getDescription());
         assertEquals(expectedProjects.get(1).getStartDate(), actualProjects.get(1).getStartDate());
         assertEquals(expectedProjects.get(1).getEndDate(), actualProjects.get(1).getEndDate());
         assertEquals(expectedProjects.get(1).getStatus(), actualProjects.get(1).getStatus());
         assertEquals(expectedProjects.get(2).getId(), actualProjects.get(2).getId());
         assertEquals(expectedProjects.get(2).getName(), actualProjects.get(2).getName());
-        assertEquals(expectedProjects.get(2).getDescription(), actualProjects.get(2).getDescription());
+        assertEquals(expectedProjects.get(2).getDescription(),
+                actualProjects.get(2).getDescription());
         assertEquals(expectedProjects.get(2).getStartDate(), actualProjects.get(2).getStartDate());
         assertEquals(expectedProjects.get(2).getEndDate(), actualProjects.get(2).getEndDate());
         assertEquals(expectedProjects.get(2).getStatus(), actualProjects.get(2).getStatus());
@@ -57,13 +60,14 @@ public class ProjectRepositoryTest {
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = "classpath:/database/project/remove-all-projects.sql",
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    public void findAllProjectsByIDAndUserId_CorrectIds_ReturnsCorrectProject() {
+    public void findAllProjectsByIdAndUserId_CorrectIds_ReturnsCorrectProject() {
         Optional<Project> expectedProjects = createProject();
         Optional<Project> actualProjects = projectRepository.findByUserIdAndProjectId(2L, 2L);
         assertNotNull(actualProjects);
         assertEquals(expectedProjects.get().getId(), actualProjects.get().getId());
         assertEquals(expectedProjects.get().getName(), actualProjects.get().getName());
-        assertEquals(expectedProjects.get().getDescription(), actualProjects.get().getDescription());
+        assertEquals(expectedProjects.get().getDescription(),
+                actualProjects.get().getDescription());
         assertEquals(expectedProjects.get().getStartDate(), actualProjects.get().getStartDate());
         assertEquals(expectedProjects.get().getEndDate(), actualProjects.get().getEndDate());
         assertEquals(expectedProjects.get().getStatus(), actualProjects.get().getStatus());
