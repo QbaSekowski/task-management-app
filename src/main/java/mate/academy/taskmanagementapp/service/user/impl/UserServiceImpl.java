@@ -52,9 +52,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDto updateUserInfo(Long id,
                                           UserRegistrationRequestDto userRegistrationRequestDto) {
-        User user = userMapper.toModel(userRegistrationRequestDto);
-        user.setId(id);
-        return userMapper.toDto(userRepository.save(user));
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("User with id " + id + " not found"));
+        User updatedUser = userMapper.updateUser(userRegistrationRequestDto, user);
+        updatedUser.setPassword(user.getPassword());
+        updatedUser.setRoles(user.getRoles());
+        return userMapper.toDto(userRepository.save(updatedUser));
     }
 
     @Transactional

@@ -57,8 +57,8 @@ public class ProjectServiceImpl implements ProjectService {
         Project project = projectRepository.findByUserIdAndProjectId(userId, projectId).orElseThrow(
                 () -> new EntityNotFoundException("Project by id "
                         + projectId + " and user id " + userId + " not found"));
-        project.setId(projectId);
-        return projectMapper.toDto(projectRepository.save(project));
+        Project updatedProject = projectMapper.updateProject(createProjectRequestDto, project);
+        return projectMapper.toDto(projectRepository.save(updatedProject));
     }
 
     @Transactional

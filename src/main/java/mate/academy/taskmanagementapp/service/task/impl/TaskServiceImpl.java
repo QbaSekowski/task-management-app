@@ -62,8 +62,8 @@ public class TaskServiceImpl implements TaskService {
         Task task = taskRepository.findByAssigneeIdAndId(userId, taskId).orElseThrow(
                 () -> new EntityNotFoundException("Task by id "
                         + taskId + " and user by id " + userId + " not found"));
-        task.setId(taskId);
-        return taskMapper.toDto(taskRepository.save(task));
+        Task updatedTask = taskMapper.updateTask(createTaskRequestDto, task);
+        return taskMapper.toDto(taskRepository.save(updatedTask));
     }
 
     @Transactional
