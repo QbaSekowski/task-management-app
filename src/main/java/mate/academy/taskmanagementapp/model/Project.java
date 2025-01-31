@@ -41,6 +41,7 @@ public class Project {
     @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
     @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
     private Status status = Status.INITIATED;
     @ManyToMany
     @JoinTable(name = "projects_users",
