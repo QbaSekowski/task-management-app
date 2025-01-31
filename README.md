@@ -32,13 +32,13 @@ Below is a representation of the database used in the project:
 
 ![task-management-db-diagram.png](task-management-db-diagram.png)
 
-### Controllers
+## Controllers
 
 1. **Auth Controller**:
     - POST: /api/auth/register - User registration
     - POST: /api/auth/login - User authentication
 
-2. Users Controller: Managing authentication and user registration
+2. **Users Controller**: Managing authentication and user registration
     - PUT: /users/{id}/role - update user role (only for admin role)
     - GET: /users/me - get my profile info
     - PUT/PATCH: /users/me - update profile info
