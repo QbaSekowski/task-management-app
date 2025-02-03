@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.jdbc.Sql;
 
 @DataJpaTest
@@ -32,7 +33,7 @@ public class TaskRepositoryTest {
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void findAllByAssigneeId_CorrectId_ReturnsAllCorrectTasks() {
         List<Task> expectedTasks = createTwoTasks();
-        List<Task> actualTasks = taskRepository.findAllByAssigneeId(2L);
+        List<Task> actualTasks = taskRepository.findAllByAssigneeId(2L, PageRequest.of(0, 10));
         assertNotNull(actualTasks);
         assertEquals(expectedTasks.size(), actualTasks.size());
         assertEquals(expectedTasks.get(0).getId(), actualTasks.get(0).getId());

@@ -10,6 +10,7 @@ import mate.academy.taskmanagementapp.mapper.LabelMapper;
 import mate.academy.taskmanagementapp.model.Label;
 import mate.academy.taskmanagementapp.repository.label.LabelRepository;
 import mate.academy.taskmanagementapp.service.label.LabelService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,8 +28,8 @@ public class LabelServiceImpl implements LabelService {
     }
 
     @Override
-    public List<LabelDto> getAllLabels() {
-        return labelRepository.findAll().stream()
+    public List<LabelDto> getAllLabels(Pageable pageable) {
+        return labelRepository.findAll(pageable).stream()
                 .map(labelMapper::toDto)
                 .collect(Collectors.toList());
     }

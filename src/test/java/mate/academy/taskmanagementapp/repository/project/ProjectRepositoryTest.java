@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.jdbc.Sql;
 
 @DataJpaTest
@@ -28,7 +29,7 @@ public class ProjectRepositoryTest {
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void findAllProjectsByUserId_CorrectId_ReturnsAllCorrectProjects() {
         List<Project> expectedProjects = createThreeProjects();
-        List<Project> actualProjects = projectRepository.findAllByUserId(1L);
+        List<Project> actualProjects = projectRepository.findAllByUserId(1L, PageRequest.of(0, 10));
         assertNotNull(actualProjects);
         assertEquals(expectedProjects.size(), actualProjects.size());
         assertEquals(expectedProjects.get(0).getId(), actualProjects.get(0).getId());

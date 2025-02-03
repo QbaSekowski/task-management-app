@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.jdbc.Sql;
 
 @DataJpaTest
@@ -36,7 +37,8 @@ public class CommentRepositoryTest {
     @Sql(scripts = "classpath:/database/project/remove-all-projects.sql",
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void findAllCommentsByUserIdAndTaskId_IncorrectId_ReturnsEmptyList() {
-        List<Comment> actualComments = commentRepository.findAllByUserIdAndTaskId(1L, 4L);
+        List<Comment> actualComments = commentRepository.findAllByUserIdAndTaskId(1L, 4L,
+                PageRequest.of(0, 10));
         assertEquals(0, actualComments.size());
     }
 
@@ -56,7 +58,8 @@ public class CommentRepositoryTest {
             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void findAllCommentsByUserIdAndTaskId_CorrectID_ReturnsAllCorrectComments() {
         List<Comment> expectedComments = createTwoComments();
-        List<Comment> actualComments = commentRepository.findAllByUserIdAndTaskId(2L, 1L);
+        List<Comment> actualComments = commentRepository.findAllByUserIdAndTaskId(2L, 1L,
+                PageRequest.of(0, 10));
         assertNotNull(actualComments);
         assertEquals(expectedComments.size(), actualComments.size());
         assertEquals(expectedComments.get(0).getId(), actualComments.get(0).getId());

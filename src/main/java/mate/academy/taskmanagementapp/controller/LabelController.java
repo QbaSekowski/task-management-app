@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import mate.academy.taskmanagementapp.dto.label.CreateLabelRequestDto;
 import mate.academy.taskmanagementapp.dto.label.LabelDto;
 import mate.academy.taskmanagementapp.service.label.LabelService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,8 +44,8 @@ public class LabelController {
     @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Get all labels",
             description = "Get all labels")
-    public List<LabelDto> getAllLabels() {
-        return labelService.getAllLabels();
+    public List<LabelDto> getAllLabels(Pageable pageable) {
+        return labelService.getAllLabels(pageable);
     }
 
     @PutMapping("/{id}")

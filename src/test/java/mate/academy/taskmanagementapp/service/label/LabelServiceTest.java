@@ -19,6 +19,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
 @ExtendWith(MockitoExtension.class)
 public class LabelServiceTest {
@@ -49,11 +51,13 @@ public class LabelServiceTest {
     public void getAllLabels_CorrectLabelRequest_ReturnsAllLabelDtos() {
         List<Label> labels = createThreeLabels();
         List<LabelDto> expected = createThreeLabelDtos();
-        when(labelRepository.findAll()).thenReturn(labels);
+        PageImpl<Label> labelsPage
+                = new PageImpl<>(labels, PageRequest.of(0, 10), labels.size());
+        when(labelRepository.findAll(PageRequest.of(0, 10))).thenReturn(labelsPage);
         when(labelMapper.toDto(labels.get(0))).thenReturn(expected.get(0));
         when(labelMapper.toDto(labels.get(1))).thenReturn(expected.get(1));
         when(labelMapper.toDto(labels.get(2))).thenReturn(expected.get(2));
-        List<LabelDto> actual = labelService.getAllLabels();
+        List<LabelDto> actual = labelService.getAllLabels(PageRequest.of(0, 10));
         assertNotNull(actual);
         assertEquals(expected.size(), actual.size());
         assertEquals(expected, actual);

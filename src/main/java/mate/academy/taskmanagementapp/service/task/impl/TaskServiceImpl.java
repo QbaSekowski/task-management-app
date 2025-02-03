@@ -14,6 +14,7 @@ import mate.academy.taskmanagementapp.repository.project.ProjectRepository;
 import mate.academy.taskmanagementapp.repository.task.TaskRepository;
 import mate.academy.taskmanagementapp.repository.user.UserRepository;
 import mate.academy.taskmanagementapp.service.task.TaskService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,8 +44,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<TaskDto> getAllTasks(Long userId) {
-        return taskRepository.findAllByAssigneeId(userId).stream()
+    public List<TaskDto> getAllTasks(Long userId, Pageable pageable) {
+        return taskRepository.findAllByAssigneeId(userId, pageable).stream()
                 .map(taskMapper::toDto)
                 .collect(Collectors.toList());
     }

@@ -9,6 +9,7 @@ import mate.academy.taskmanagementapp.dto.task.CreateTaskRequestDto;
 import mate.academy.taskmanagementapp.dto.task.TaskDto;
 import mate.academy.taskmanagementapp.service.task.TaskService;
 import mate.academy.taskmanagementapp.service.user.UserService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -48,9 +49,9 @@ public class TaskController {
     @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Get all tasks",
             description = "Retrieve all tasks of a specific user")
-    public List<TaskDto> getAllTasks(Authentication authentication) {
+    public List<TaskDto> getAllTasks(Authentication authentication, Pageable pageable) {
         return taskService.getAllTasks(
-                userService.getUserFromAuthentication(authentication).getId());
+                userService.getUserFromAuthentication(authentication).getId(), pageable);
     }
 
     @GetMapping("/{id}")

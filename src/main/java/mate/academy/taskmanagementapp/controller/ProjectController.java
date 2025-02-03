@@ -9,6 +9,7 @@ import mate.academy.taskmanagementapp.dto.project.CreateProjectRequestDto;
 import mate.academy.taskmanagementapp.dto.project.ProjectDto;
 import mate.academy.taskmanagementapp.service.project.ProjectService;
 import mate.academy.taskmanagementapp.service.user.UserService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -49,9 +50,9 @@ public class ProjectController {
     @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Get all projects",
             description = "Get all user's projects")
-    public List<ProjectDto> getAllProjects(Authentication authentication) {
+    public List<ProjectDto> getAllProjects(Authentication authentication, Pageable pageable) {
         return projectService.getAllProjects(
-                userService.getUserFromAuthentication(authentication).getId());
+                userService.getUserFromAuthentication(authentication).getId(), pageable);
     }
 
     @GetMapping("/{id}")

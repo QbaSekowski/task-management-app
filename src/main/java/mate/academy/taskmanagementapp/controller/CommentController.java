@@ -9,6 +9,7 @@ import mate.academy.taskmanagementapp.dto.comment.CommentDto;
 import mate.academy.taskmanagementapp.dto.comment.CreateCommentRequestDto;
 import mate.academy.taskmanagementapp.service.comment.CommentService;
 import mate.academy.taskmanagementapp.service.user.UserService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -48,9 +49,10 @@ public class CommentController {
     @Operation(summary = "Get comments for a task",
             description = "Get all comments for a task")
     public List<CommentDto> getAllCommentsForTask(Authentication authentication,
-                                                  @PathVariable Long taskId) {
+                                                  @PathVariable Long taskId,
+                                                  Pageable pageable) {
         return commentService.getAllCommentsForTask(
                 userService.getUserFromAuthentication(authentication).getId(),
-                taskId);
+                taskId, pageable);
     }
 }

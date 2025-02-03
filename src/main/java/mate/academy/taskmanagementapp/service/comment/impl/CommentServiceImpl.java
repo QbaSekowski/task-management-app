@@ -14,6 +14,7 @@ import mate.academy.taskmanagementapp.repository.comment.CommentRepository;
 import mate.academy.taskmanagementapp.repository.task.TaskRepository;
 import mate.academy.taskmanagementapp.repository.user.UserRepository;
 import mate.academy.taskmanagementapp.service.comment.CommentService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,8 +43,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDto> getAllCommentsForTask(Long userId, Long taskId) {
-        return commentRepository.findAllByUserIdAndTaskId(userId, taskId).stream()
+    public List<CommentDto> getAllCommentsForTask(Long userId, Long taskId, Pageable pageable) {
+        return commentRepository.findAllByUserIdAndTaskId(userId, taskId, pageable).stream()
                 .map(commentMapper::toDto)
                 .collect(Collectors.toList());
     }
