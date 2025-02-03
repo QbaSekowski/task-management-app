@@ -94,7 +94,7 @@ then rename file .env.template to .env
 4. Run the command `mvn clean package`.
 5. Use `docker-compose build` to build Docker container.
 6. Use `docker-compose up` to run Docker container.
-7. Access the locally running application at http://localhost:8088/api.
+7. Access the locally running application at http://localhost:8088.
    Feel free to test my application using Postman/Swagger.  
    **Postman**: Keep in mind that you have to pass Authorization (Bearer Token) that you receive when logging in.  
    Do you want to test admin features? Here are credentials of sample admin:
