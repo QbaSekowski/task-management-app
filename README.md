@@ -1,10 +1,9 @@
-![logo.png](logo.png)
+![logo_new.png](logo_new.png)
 # Task Management App
 
 Manage tasks and projects effectively through a web-based application. This system enables task creation, assignment, progress tracking, and completion.
 
 ## Technologies Used in the project
-
 - Backend: Spring Framework (Spring Boot, Spring Security, Spring Data JPA), JWT, MySQL, Mapstruct, Jackson
 - Build Tool: Maven
 - Database Migration: Liquibase
@@ -71,6 +70,46 @@ Below is a representation of the database used in the project:
     - PUT: /api/labels/{id} - Update label (only for admin role)
     - DELETE: /api/labels/{id} - Delete label (only for admin role)
 
-## Challenges
+## How to run Task Management App
+1. Download and install [Docker](https://www.docker.com/products/docker-desktop/), [Maven](https://maven.apache.org/download.cgi), [JDK Development Kit](https://www.oracle.com/pl/java/technologies/downloads/).
+2. Clone the project [git repository](https://github.com/QbaSekowski/task-management-app.git).
+3. In the .env.template file you should provide necessary DB and Docker variables, here is an example:
+```mysql
+MYSQLDB_USER=root
+MYSQLDB_ROOT_PASSWORD=root
+MYSQLDB_DATABASE=task_management_db
+MYSQLDB_LOCAL_PORT=3307
+MYSQLDB_DOCKER_PORT=3306
 
+JWT_EXPIRATION=3000000
+JWT_SECRET=your_secret_for_jwt_token
+
+DROPBOX_ACCESS_TOKEN=your_access_token_to_dropbox
+
+SPRING_LOCAL_PORT=8088
+SPRING_DOCKER_PORT=8080
+DEBUG_PORT=5005
+```
+then rename file .env.template to .env
+4. Run the command `mvn clean package`.
+5. Use `docker-compose build` to build Docker container.
+6. Use `docker-compose up` to run Docker container.
+7. Access the locally running application at http://localhost:8088/api.
+   Feel free to test my application using Postman/Swagger.  
+   **Postman**: Keep in mind that you have to pass Authorization (Bearer Token) that you receive when logging in.  
+   Do you want to test admin features? Here are credentials of sample admin:
+   ```json
+   {
+   "email": "admin@gmail.com",
+   "password": "12345678"
+   }
+   ```
+   or perhaps standard user features:
+   ```json
+   {
+   "email": "jurek@wp.pl",
+   "password": "qwertyui"
+   }
+   ```
+## Challenges
 The biggest challenge for me personally was understanding how Dropbox works and how to use it in an application. This required studying the documentation provided by its creators, and based on that, figuring out how to write functionality specifically for my application.
