@@ -72,7 +72,9 @@ Below is a representation of the database used in the project:
 
 ## How to run Task Management App
 1. Download and install [Docker](https://www.docker.com/products/docker-desktop/), [Maven](https://maven.apache.org/download.cgi), [JDK Development Kit](https://www.oracle.com/pl/java/technologies/downloads/).
+
 2. Clone the project [git repository](https://github.com/QbaSekowski/task-management-app.git).
+
 3. In the .env.template file you should provide necessary DB and Docker variables, here is an example:
 ```mysql
 MYSQLDB_USER=root
@@ -90,10 +92,14 @@ SPRING_LOCAL_PORT=8088
 SPRING_DOCKER_PORT=8080
 DEBUG_PORT=5005
 ```
-then rename file .env.template to .env
+then rename file .env.template to .env .
+
 4. Run the command `mvn clean package`.
+
 5. Use `docker-compose build` to build Docker container.
+
 6. Use `docker-compose up` to run Docker container.
+
 7. Access the locally running application at http://localhost:8088.
    Feel free to test my application using Postman/Swagger.  
    **Postman**: Keep in mind that you have to pass Authorization (Bearer Token) that you receive when logging in.  
