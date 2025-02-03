@@ -117,5 +117,8 @@ then rename file .env.template to .env .
    "password": "qwertyui"
    }
    ```
+   
+8. To stop Docker use command `docker-compose down`.
+
 ## Challenges
 The biggest challenge for me personally was understanding how Dropbox works and how to use it in an application. This required studying the documentation provided by its creators, and based on that, figuring out how to write functionality specifically for my application.
