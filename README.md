@@ -97,7 +97,8 @@ SPRING_LOCAL_PORT=8088
 SPRING_DOCKER_PORT=8080
 DEBUG_PORT=5005
 ```
-then rename file .env.template to .env .
+In place of "your_secret_for_jwt_token" you should provide your JWT secret and in "your_access_token_to_dropbox" you should write your dropbox access token which you can generate in your dropbox account. 
+Then rename file .env.template to .env .
 
 4. Run the command `mvn clean package`.
 
@@ -128,3 +129,4 @@ then rename file .env.template to .env .
 ## Challenges
 The biggest challenge for me personally was understanding how Dropbox works and how to use it in an application. This required studying the documentation provided by its creators, and based on that, figuring out how to write functionality specifically for my application.
 Thankfully Dropbox also provides Dropbox SDK library which helps a lot in managing its functions.
+Before starting this project I didn't know how to implement email notifications too, but after some minor research I realized that it is quite simple really. Spring Boot Starter Mail provides many useful tools for that, which makes the code simple and clean. 
