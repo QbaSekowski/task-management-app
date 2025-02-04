@@ -7,6 +7,8 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.taskmanagementapp.dto.task.CreateTaskRequestDto;
 import mate.academy.taskmanagementapp.dto.task.TaskDto;
+import mate.academy.taskmanagementapp.model.User;
+import mate.academy.taskmanagementapp.service.email.EmailService;
 import mate.academy.taskmanagementapp.service.task.TaskService;
 import mate.academy.taskmanagementapp.service.user.UserService;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TaskController {
     private final TaskService taskService;
     private final UserService userService;
+    private final EmailService emailService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -40,9 +43,14 @@ public class TaskController {
             + "status, dueDate, projectId and assigneeId")
     public TaskDto createTask(Authentication authentication,
                               @RequestBody @Valid CreateTaskRequestDto createTaskRequestDto) {
-        return taskService.createTask(
-                userService.getUserFromAuthentication(authentication).getId(),
-                createTaskRequestDto);
+        User user = userService.getUserFromAuthentication(authentication);
+        TaskDto taskDto = taskService.createTask(user.getId(), createTaskRequestDto);
+        if (taskDto != null) {
+            emailService.sendEmail(user.getEmail(), "Task created successfully",
+                    "Task has been created successfully. Its deadline is "
+                            + taskDto.dueDate());
+        }
+        return taskDto;
     }
 
     @GetMapping
