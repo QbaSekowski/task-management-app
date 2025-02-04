@@ -7,7 +7,9 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.taskmanagementapp.dto.comment.CommentDto;
 import mate.academy.taskmanagementapp.dto.comment.CreateCommentRequestDto;
+import mate.academy.taskmanagementapp.model.User;
 import mate.academy.taskmanagementapp.service.comment.CommentService;
+import mate.academy.taskmanagementapp.service.email.EmailService;
 import mate.academy.taskmanagementapp.service.user.UserService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CommentController {
     private final CommentService commentService;
     private final UserService userService;
+    private final EmailService emailService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -39,9 +42,15 @@ public class CommentController {
     public CommentDto createComment(Authentication authentication,
                                     @RequestBody @Valid CreateCommentRequestDto
                                             createCommentRequestDto) {
-        return commentService.createComment(
-                userService.getUserFromAuthentication(authentication).getId(),
+        User user = userService.getUserFromAuthentication(authentication);
+        CommentDto commentDto = commentService.createComment(user.getId(),
                 createCommentRequestDto);
+        if (commentDto != null) {
+            emailService.sendEmail(user.getEmail(), "Comment created successfully",
+                    "Your comment has been created successfully. Its timestamp is "
+                            + commentDto.timestamp());
+        }
+        return commentDto;
     }
 
     @GetMapping("/{taskId}")

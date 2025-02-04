@@ -10,6 +10,7 @@ import mate.academy.taskmanagementapp.dto.user.UserRegistrationRequestDto;
 import mate.academy.taskmanagementapp.dto.user.UserResponseDto;
 import mate.academy.taskmanagementapp.exception.RegistrationException;
 import mate.academy.taskmanagementapp.security.AuthenticationService;
+import mate.academy.taskmanagementapp.service.email.EmailService;
 import mate.academy.taskmanagementapp.service.user.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final UserService userService;
+    private final EmailService emailService;
 
     @PostMapping("/registration")
     @ResponseStatus(HttpStatus.CREATED)
@@ -35,7 +37,14 @@ public class AuthenticationController {
     public UserResponseDto register(
             @RequestBody @Valid UserRegistrationRequestDto request)
             throws RegistrationException {
-        return userService.register(request);
+        UserResponseDto userResponseDto = userService.register(request);
+        if (userResponseDto != null) {
+            emailService.sendEmail(userResponseDto.email(), "Registration successfull",
+                    "Your registration was successfull. "
+                    + "Now you can log in application using credentials "
+                    + "you provided during registration");
+        }
+        return userResponseDto;
     }
 
     @PostMapping("/login")

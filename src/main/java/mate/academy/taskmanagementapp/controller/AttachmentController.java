@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.taskmanagementapp.dto.attachment.AttachmentDto;
+import mate.academy.taskmanagementapp.model.User;
 import mate.academy.taskmanagementapp.service.attachment.AttachmentService;
+import mate.academy.taskmanagementapp.service.email.EmailService;
 import mate.academy.taskmanagementapp.service.user.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class AttachmentController {
     private final AttachmentService attachmentService;
     private final UserService userService;
+    private final EmailService emailService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -39,9 +42,16 @@ public class AttachmentController {
                                           @RequestParam("multipartFile") MultipartFile
                                                       multipartFile)
             throws IOException, InterruptedException {
-        return attachmentService.uploadAttachment(
-                userService.getUserFromAuthentication(authentication).getId(),
+        User user = userService.getUserFromAuthentication(authentication);
+        AttachmentDto attachmentDto = attachmentService.uploadAttachment(
+                user.getId(),
                 taskId, multipartFile);
+        if (attachmentDto != null) {
+            emailService.sendEmail(user.getEmail(), "Upload successful",
+                    "Your attachment for task id: " + taskId
+                            + " was uploaded successfully to Dropbox.");
+        }
+        return attachmentDto;
     }
 
     @GetMapping("/{taskId}")

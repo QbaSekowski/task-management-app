@@ -2,9 +2,11 @@
 # Task Management App
 
 Manage tasks and projects effectively through a web-based application. This system enables task creation, assignment, progress tracking, and completion.
+You can create your own project with tasks. Add comments, labels and upload attachments to your Dropbox account.
+Registering new users, managing their roles is also possible. The app also can send email notifications about your actions and their successfull accomplishments.
 
 ## Technologies Used in the project
-- Backend: Spring Framework (Spring Boot, Spring Security, Spring Data JPA), JWT, MySQL, Mapstruct, Jackson, Dropbox SDK
+- Backend: Spring Framework (Spring Boot, Spring Security, Spring Data JPA), JWT, MySQL, Mapstruct, Jackson, Dropbox SDK, Spring Boot Starter Mail
 - Build Tool: Maven
 - Database Migration: Liquibase
 - Containerization: Docker
@@ -87,6 +89,9 @@ JWT_EXPIRATION=3000000
 JWT_SECRET=your_secret_for_jwt_token
 
 DROPBOX_ACCESS_TOKEN=your_access_token_to_dropbox
+
+MAIL_USERNAME=myemail@gmail.com
+MAIL_PASSWORD=password
 
 SPRING_LOCAL_PORT=8088
 SPRING_DOCKER_PORT=8080
