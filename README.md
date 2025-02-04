@@ -4,7 +4,7 @@
 Manage tasks and projects effectively through a web-based application. This system enables task creation, assignment, progress tracking, and completion.
 
 ## Technologies Used in the project
-- Backend: Spring Framework (Spring Boot, Spring Security, Spring Data JPA), JWT, MySQL, Mapstruct, Jackson
+- Backend: Spring Framework (Spring Boot, Spring Security, Spring Data JPA), JWT, MySQL, Mapstruct, Jackson, Dropbox SDK
 - Build Tool: Maven
 - Database Migration: Liquibase
 - Containerization: Docker
@@ -122,3 +122,4 @@ then rename file .env.template to .env .
 
 ## Challenges
 The biggest challenge for me personally was understanding how Dropbox works and how to use it in an application. This required studying the documentation provided by its creators, and based on that, figuring out how to write functionality specifically for my application.
+Thankfully Dropbox also provides Dropbox SDK library which helps a lot in managing its functions.
