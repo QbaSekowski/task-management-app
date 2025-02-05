@@ -3,7 +3,7 @@
 
 Manage tasks and projects effectively through a web-based application. This system enables task creation, assignment, progress tracking, and completion.
 You can create your own project with tasks. Add comments, labels and upload attachments to your Dropbox account.
-Registering new users, managing their roles is also possible. The app also can send email notifications about your actions and their successfull accomplishments.
+Registering new users, managing their roles is also possible. The app also can send email notifications about your actions and their successful accomplishments.
 
 ## Technologies Used in the project
 - Backend: Spring Framework (Spring Boot, Spring Security, Spring Data JPA), JWT, MySQL, Mapstruct, Jackson, Dropbox SDK, Spring Boot Starter Mail
