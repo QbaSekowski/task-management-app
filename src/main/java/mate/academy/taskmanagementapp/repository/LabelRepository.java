@@ -1,4 +1,4 @@
-package mate.academy.taskmanagementapp.repository.label;
+package mate.academy.taskmanagementapp.repository;
 
 import mate.academy.taskmanagementapp.model.Label;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,7 +1,7 @@
 package mate.academy.taskmanagementapp.security;
 
 import lombok.RequiredArgsConstructor;
-import mate.academy.taskmanagementapp.repository.user.UserRepository;
+import mate.academy.taskmanagementapp.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -1,4 +1,4 @@
-package mate.academy.taskmanagementapp.repository.project;
+package mate.academy.taskmanagementapp.repository;
 
 import java.util.List;
 import java.util.Optional;

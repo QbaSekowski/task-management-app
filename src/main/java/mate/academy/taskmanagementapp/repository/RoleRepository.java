@@ -1,4 +1,4 @@
-package mate.academy.taskmanagementapp.repository.role;
+package mate.academy.taskmanagementapp.repository;
 
 import java.util.Optional;
 import mate.academy.taskmanagementapp.model.Role;

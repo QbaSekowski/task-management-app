@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import mate.academy.taskmanagementapp.exception.EntityNotFoundException;
 import mate.academy.taskmanagementapp.model.User;
+import mate.academy.taskmanagementapp.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

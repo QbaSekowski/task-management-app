@@ -1,4 +1,4 @@
-package mate.academy.taskmanagementapp.repository.user;
+package mate.academy.taskmanagementapp.repository;
 
 import java.util.Optional;
 import mate.academy.taskmanagementapp.model.User;

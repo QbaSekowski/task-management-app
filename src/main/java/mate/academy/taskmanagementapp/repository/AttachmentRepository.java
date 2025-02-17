@@ -1,4 +1,4 @@
-package mate.academy.taskmanagementapp.repository.attachment;
+package mate.academy.taskmanagementapp.repository;
 
 import java.util.List;
 import mate.academy.taskmanagementapp.model.Attachment;

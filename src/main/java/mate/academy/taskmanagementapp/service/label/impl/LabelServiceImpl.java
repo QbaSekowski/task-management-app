@@ -8,7 +8,7 @@ import mate.academy.taskmanagementapp.dto.label.LabelDto;
 import mate.academy.taskmanagementapp.exception.EntityNotFoundException;
 import mate.academy.taskmanagementapp.mapper.LabelMapper;
 import mate.academy.taskmanagementapp.model.Label;
-import mate.academy.taskmanagementapp.repository.label.LabelRepository;
+import mate.academy.taskmanagementapp.repository.LabelRepository;
 import mate.academy.taskmanagementapp.service.label.LabelService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
