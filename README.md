@@ -112,14 +112,14 @@ Then rename file .env.template to .env .
    Do you want to test admin features? Here are credentials of sample admin:
    ```json
    {
-   "email": "admin@gmail.com",
+   "username": "admin",
    "password": "12345678"
    }
    ```
    or perhaps standard user features:
    ```json
    {
-   "email": "jurek@wp.pl",
+   "username": "jurek",
    "password": "qwertyui"
    }
    ```
